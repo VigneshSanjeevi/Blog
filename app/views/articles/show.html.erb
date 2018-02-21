@@ -1,0 +1,25 @@
+
+<p>
+  <strong>Title:</strong>
+  <%= @article.title %>
+</p>
+ 
+<p>
+  <strong>Text:</strong>
+  <%= @article.text %>
+</p>
+<table cellpadding=10 cellspacing=10><tr><td> 
+<h2>Comments</h2>
+<%= render @article.comments %></td>
+ <td>
+
+<% if current_user.present? -%>
+
+<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<%= render 'comments/form' %>
+<% else -%>
+<%= link_to_if(@current_user.nil?, "Login to add comment", new_user_session_path) %>
+<% end %>
+</td></tr></table>
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>
